@@ -1,0 +1,383 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>The Why Files | Minecraft Research Division</title>
+    
+    <link rel="icon" type="image/png" href="https://cdn.shopify.com/s/files/1/0657/4689/5093/files/youtube_icon_avatar_800x800_trans_v02.png?v=1660268953&format=webp">
+
+    <meta name="title" content="The Why Files | Minecraft Research Division">
+    <meta name="description" content="Official Minecraft Research Terminal. Investigate the unknown, protect the timeline, and uncover the truth. Join the division.">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://xacanon.github.io/"> 
+    <meta property="og:title" content="Why Files | Research Division MC">
+    <meta property="og:description" content="Official Server Terminal. Status: Online. Clearance: Level 0. Join the hunt for the truth.">
+    <meta property="og:image" content="https://cdn.shopify.com/s/files/1/0657/4689/5093/files/youtube_icon_avatar_800x800_trans_v02.png?v=1660268953&format=webp">
+    
+    <meta name="theme-color" content="#99E6FF">
+
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --wf-navy: #051C2C;
+            --wf-red: #C30010;
+            --wf-cyan: #99E6FF;
+            --wf-white: #FFFFFF;
+        }
+
+        body {
+            margin: 0; padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: radial-gradient(circle at center, #0a2e47 0%, var(--wf-navy) 100%);
+            color: var(--wf-white);
+            display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* --- Navigation --- */
+        .navbar {
+            width: 100%; display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 40px; box-sizing: border-box; position: fixed; top: 0; z-index: 100;
+        }
+
+        .nav-btn {
+            color: var(--wf-white); text-decoration: none; font-weight: 900;
+            letter-spacing: 2px; border: 1px solid rgba(255,255,255,0.2);
+            padding: 8px 20px; transition: 0.3s; background: rgba(5, 28, 44, 0.5);
+            backdrop-filter: blur(5px); text-transform: uppercase; font-size: 0.8rem;
+        }
+
+        /* --- Hamburger Menu --- */
+        .menu-wrap { position: fixed; top: 20px; right: 40px; z-index: 200; }
+        .menu-wrap .toggler { position: absolute; top: 0; right: 0; z-index: 202; cursor: pointer; width: 50px; height: 50px; opacity: 0; }
+        .menu-wrap .hamburger { width: 50px; height: 50px; padding: 10px; display: flex; align-items: center; justify-content: center; position: relative; z-index: 201; }
+        .menu-wrap .hamburger > div { position: relative; width: 100%; height: 3px; background: var(--wf-cyan); transition: all 0.4s ease; }
+        .menu-wrap .hamburger > div::before, .menu-wrap .hamburger > div::after { content: ''; position: absolute; top: -10px; width: 100%; height: 3px; background: inherit; }
+        .menu-wrap .hamburger > div::after { top: 10px; }
+        .menu-wrap .toggler:checked + .hamburger > div { transform: rotate(135deg); background: var(--wf-red); }
+        .menu-wrap .toggler:checked + .hamburger > div::before, .menu-wrap .toggler:checked + .hamburger > div::after { top: 0; transform: rotate(90deg); }
+        .menu-wrap .menu { position: fixed; top: 0; right: 0; width: 100%; height: 100%; visibility: hidden; display: flex; align-items: center; justify-content: flex-end; z-index: 150; }
+        .menu-wrap .menu > div { background: rgba(5, 28, 44, 0.98); border-left: 4px solid var(--wf-red); width: 300px; height: 100%; display: flex; align-items: center; justify-content: center; transform: translateX(100%); transition: all 0.4s ease; }
+        .menu-wrap .toggler:checked ~ .menu { visibility: visible; }
+        .menu-wrap .toggler:checked ~ .menu > div { transform: translateX(0); }
+        .menu-wrap .menu ul { list-style: none; padding: 0; text-align: right; }
+        .menu-wrap .menu ul li { padding: 1.2rem 2rem; }
+        .menu-wrap .menu ul li a { color: var(--wf-white); text-decoration: none; font-size: 1.6rem; font-weight: 900; }
+
+        /* --- LOGO SECTION --- */
+        header { padding: 140px 20px 40px; text-align: center; }
+
+        .logo-container {
+            display: flex; align-items: center; justify-content: center; gap: 20px;
+            font-family: 'Archivo Black', sans-serif; font-size: 4rem;
+            letter-spacing: -2px; text-transform: uppercase;
+            filter: drop-shadow(0 0 10px rgba(153, 230, 255, 0.3));
+        }
+
+        .wf-logo-img {
+            width: 120px; height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            filter: drop-shadow(0 0 15px rgba(195, 0, 16, 0.6));
+            border: 2px solid rgba(255,255,255,0.1);
+        }
+
+        .text-why { color: var(--wf-white); }
+        .text-files { color: var(--wf-cyan); }
+
+        /* --- Main Content Layout --- */
+        .content-container {
+            display: flex; flex-direction: column; align-items: center;
+            width: 90%; max-width: 1100px; margin-bottom: 80px; gap: 40px;
+        }
+
+        /* --- Server Card --- */
+        .server-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(153, 230, 255, 0.15);
+            padding: 40px; border-radius: 4px; backdrop-filter: blur(10px);
+            text-align: center; width: 100%; box-sizing: border-box;
+        }
+
+        .ip-box {
+            background: #000; padding: 15px; border-radius: 4px;
+            font-family: 'Courier New', monospace; color: var(--wf-cyan);
+            font-size: 1.5rem; margin: 25px 0; border: 1px solid var(--wf-cyan);
+            cursor: pointer; transition: 0.3s;
+            text-transform: uppercase; font-weight: bold;
+        }
+
+        .ip-box:hover { background: var(--wf-cyan); color: var(--wf-navy); box-shadow: 0 0 25px var(--wf-cyan); }
+
+        /* --- YOUTUBE SECTION --- */
+        .youtube-section {
+            width: 100%;
+        }
+
+        .youtube-player-wrapper {
+            background: rgba(5, 28, 44, 0.7);
+            border: 1px solid rgba(153, 230, 255, 0.15);
+            border-radius: 4px;
+            padding: 30px;
+            box-sizing: border-box;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .youtube-player-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--wf-red), var(--wf-cyan));
+        }
+
+        .youtube-label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .youtube-label .live-dot {
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            background: var(--wf-red);
+            box-shadow: 0 0 8px var(--wf-red);
+            animation: pulse 1.8s infinite;
+            flex-shrink: 0;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+
+        .youtube-label span {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            color: var(--wf-cyan);
+            text-transform: uppercase;
+        }
+
+        .youtube-label a.channel-link {
+            margin-left: auto;
+            font-size: 0.72rem;
+            letter-spacing: 2px;
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: color 0.2s;
+        }
+        .youtube-label a.channel-link:hover { color: var(--wf-cyan); }
+
+        .embed-responsive {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 2px;
+            border: 1px solid rgba(153, 230, 255, 0.1);
+        }
+
+        .embed-responsive iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border: 0;
+        }
+
+        /* --- OFFERINGS GRID --- */
+        .offering-section { width: 100%; text-align: center; }
+        .offering-title { 
+            font-family: 'Archivo Black', sans-serif; font-size: 1.5rem; 
+            color: var(--wf-cyan); margin-bottom: 25px; text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .grid-container {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px; width: 100%;
+        }
+
+        .offer-card {
+            background: rgba(5, 28, 44, 0.6);
+            border: 1px solid rgba(153, 230, 255, 0.1);
+            padding: 30px; border-radius: 4px; transition: 0.3s;
+            text-align: left; position: relative; overflow: hidden;
+        }
+        .offer-card:hover { border-color: var(--wf-red); transform: translateY(-5px); background: rgba(5, 28, 44, 0.8); }
+        
+        .offer-card h3 { 
+            margin: 0 0 10px 0; color: var(--wf-white); font-family: 'Archivo Black', sans-serif;
+            font-size: 1.1rem; text-transform: uppercase;
+        }
+        .offer-card p { margin: 0; font-size: 0.85rem; opacity: 0.7; line-height: 1.4; }
+        .offer-card::before {
+            content: 'ACTIVE'; position: absolute; top: 10px; right: -25px;
+            background: var(--wf-red); color: white; font-size: 0.6rem;
+            padding: 2px 30px; transform: rotate(45deg); font-weight: 900;
+        }
+
+        /* --- ARCADE PLACEHOLDER --- */
+        .offer-card.locked { opacity: 0.5; border-style: dashed; }
+        .offer-card.locked::before { content: 'ENCRYPTED'; background: #555; }
+        .offer-card.locked:hover { transform: none; border-color: rgba(153, 230, 255, 0.1); }
+
+        .btn { display: inline-block; padding: 15px 35px; background: var(--wf-red); color: white; text-decoration: none; border-radius: 2px; font-weight: bold; text-transform: uppercase; transition: 0.2s; letter-spacing: 1px; }
+        .btn:hover { transform: scale(1.05); box-shadow: 0 0 25px var(--wf-red); }
+
+        footer { margin-top: auto; padding: 40px; font-size: 0.8rem; opacity: 0.5; text-align: center; letter-spacing: 1px; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="nav-btn">HOME</a>
+    </nav>
+
+    <div class="menu-wrap">
+        <input type="checkbox" id="menu-toggle" class="toggler">
+        <div class="hamburger"><div></div></div>
+        <div class="menu">
+            <div>
+                <ul>
+                    <li><a href="store.html">STORE</a></li>
+                    <li><a href="vote.html">VOTE</a></li>
+                    <li><a href="lore.html">LORE</a></li>
+                    <li><a href="rules.html">RULES</a></li>
+                    <li><a href="staff.html">STAFF LIST</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <div class="logo-container">
+            <img src="https://cdn.shopify.com/s/files/1/0657/4689/5093/files/youtube_icon_avatar_800x800_trans_v02.png?v=1660268953&format=webp" alt="Why Files Logo" class="wf-logo-img">
+            <div>
+                <span class="text-why">WHY</span><span class="text-files">FILES</span>
+            </div>
+        </div>
+        <p style="color: var(--wf-cyan); letter-spacing: 4px; font-weight: 900; margin-top: 15px; font-size: 0.9rem; text-transform: uppercase;">
+            MINECRAFT RESEARCH DIVISION
+        </p>
+    </header>
+
+    <div class="content-container">
+        <main class="server-card">
+            <h2 style="letter-spacing: 2px; text-transform: uppercase; margin: 0;">OBJECTIVE: UNCOVER THE TRUTH</h2>
+            <p style="opacity: 0.8; margin-top: 10px;">The simulation is live. Collect data. Report findings to the archive.</p>
+            
+            <div class="ip-box" onclick="copyIP()">
+                PLAY.THEWHYFILES.IO
+            </div>
+            <p style="font-size: 0.7rem; opacity: 0.5; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 25px;">Click to copy coordinates</p>
+
+            <a href="https://discord.com/invite/thewhyfiles" class="btn">JOIN THE DISCORD</a>
+        </main>
+
+        <!-- YOUTUBE LATEST VIDEO -->
+        <section class="youtube-section">
+            <div class="youtube-player-wrapper">
+                <div class="youtube-label">
+                    <span class="live-dot"></span>
+                    <span>Latest Transmission</span>
+                    <a class="channel-link" href="https://www.youtube.com/@TheWhyFiles" target="_blank" rel="noopener">View Channel →</a>
+                </div>
+                <div class="embed-responsive" id="yt-embed-container"></div>
+                <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
+            </div>
+        </section>
+
+        <section class="offering-section">
+            <div class="offering-title">Available Operations</div>
+            <div class="grid-container">
+                <div class="offer-card">
+                    <h3>Survival SMP</h3>
+                </div>
+                <div class="offer-card">
+                    <h3>Creative Plots</h3>
+                </div>
+                <div class="offer-card">
+                    <h3>Build Battle</h3>
+                </div>
+                <div class="offer-card">
+                    <h3>Bed Wars</h3>
+                </div>
+                <div class="offer-card locked">
+                    <h3>Arcade Games</h3>
+                    <p>Placeholder</p>
+                </div>
+                <div class="offer-card locked">
+                    <h3>Arcade Games</h3>
+                    <p>Placeholder</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        ANOTHER MYSTERY SOLVED... OR IS IT?
+    </footer>
+
+    <script>
+        // Known latest video ID — used immediately so the player never shows an error.
+        // The RSS fetch below will silently swap it for the true latest if a newer one exists.
+        const FALLBACK_VIDEO_ID = 'ox69c8tXe64';
+
+        function buildIframe(videoId) {
+            return `<iframe
+                style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;"
+                src="https://www.youtube.com/embed/${videoId}?rel=0&color=white"
+                title="The Why Files – Latest Video"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>`;
+        }
+
+        const container = document.getElementById('yt-embed-container');
+
+        // Show the fallback immediately — no loading spinner, no error
+        container.innerHTML = buildIframe(FALLBACK_VIDEO_ID);
+
+        // Then try to fetch the true latest video from the RSS feed and upgrade if newer
+        (async function tryUpgradeToLatest() {
+            try {
+                const rssUrl = 'https://www.youtube.com/feeds/videos.xml?channel_id=UCIFk2uvCNcEmZ77g0ESKLcQ';
+                const res = await fetch(rssUrl);
+                if (!res.ok) return;
+                const text = await res.text();
+                const xml = new DOMParser().parseFromString(text, 'text/xml');
+                // videoId lives in the <yt:videoId> element (namespace prefix varies by browser)
+                const videoIdEl = xml.querySelector('videoId') || xml.getElementsByTagNameNS('http://www.youtube.com/xml/schemas/2015', 'videoId')[0];
+                const latestId = videoIdEl?.textContent?.trim();
+                if (latestId && latestId !== FALLBACK_VIDEO_ID) {
+                    container.innerHTML = buildIframe(latestId);
+                }
+            } catch (_) {
+                // Fallback already showing — nothing more to do
+            }
+        })();
+
+        function copyIP() {
+            const ip = "PLAY.THEWHYFILES.IO";
+            navigator.clipboard.writeText(ip);
+            const box = document.querySelector('.ip-box');
+            const originalText = box.innerText;
+            box.innerText = "COPIED TO CLIPBOARD";
+            box.style.borderColor = "#FFFFFF";
+            setTimeout(() => {
+                box.innerText = originalText;
+                box.style.borderColor = "var(--wf-cyan)";
+            }, 2000);
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>The Why Files | Minecraft Research Division</title>
+    
+    <link rel="icon" type="image/png" href="https://cdn.shopify.com/s/files/1/0657/4689/5093/files/youtube_icon_avatar_800x800_trans_v02.png?v=1660268953&format=webp">
+
+    <meta name="title" content="The Why Files | Minecraft Research Division">
+    <meta name="description" content="Official Minecraft Research Terminal. Investigate the unknown, protect the timeline, and uncover the truth. Join the division.">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://xacanon.github.io/"> 
+    <meta property="og:title" content="Why Files | Research Division MC">
+    <meta property="og:description" content="Official Server Terminal. Status: Online. Clearance: Level 0. Join the hunt for the truth.">
+    <meta property="og:image" content="https://cdn.shopify.com/s/files/1/0657/4689/5093/files/youtube_icon_avatar_800x800_trans_v02.png?v=1660268953&format=webp">
+    
+    <meta name="theme-color" content="#99E6FF">
+
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --wf-navy: #051C2C;
+            --wf-red: #C30010;
+            --wf-cyan: #99E6FF;
+            --wf-white: #FFFFFF;
+            --wf-dark-bg: #030f18;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: radial-gradient(circle at center, #0a2e47 0%, var(--wf-navy) 100%);
+            color: var(--wf-white);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* --- Navigation --- */
+        .navbar { width: 100%; display: flex; justify-content: space-between; padding: 20px 40px; position: fixed; top: 0; z-index: 100; box-sizing: border-box; }
+        .nav-btn { color: var(--wf-white); text-decoration: none; font-weight: 900; letter-spacing: 2px; border: 1px solid rgba(255,255,255,0.2); padding: 8px 20px; transition: 0.3s; background: rgba(5, 28, 44, 0.5); backdrop-filter: blur(5px); font-size: 0.9rem; text-transform: uppercase; }
+        .nav-btn:hover { background: var(--wf-white); color: var(--wf-navy); box-shadow: 0 0 15px var(--wf-white); }
+
+        /* --- Hamburger Menu --- */
+        .menu-wrap { position: fixed; top: 20px; right: 40px; z-index: 200; }
+        .menu-wrap .toggler { position: absolute; top: 0; right: 0; z-index: 202; cursor: pointer; width: 50px; height: 50px; opacity: 0; }
+        .menu-wrap .hamburger { width: 50px; height: 50px; padding: 10px; display: flex; align-items: center; justify-content: center; position: relative; z-index: 201; }
+        .menu-wrap .hamburger > div { position: relative; width: 100%; height: 3px; background: var(--wf-cyan); transition: all 0.4s ease; }
+        .menu-wrap .hamburger > div::before, .menu-wrap .hamburger > div::after { content: ''; position: absolute; top: -10px; width: 100%; height: 3px; background: inherit; }
+        .menu-wrap .hamburger > div::after { top: 10px; }
+        .menu-wrap .toggler:checked + .hamburger > div { transform: rotate(135deg); background: var(--wf-red); }
+        .menu-wrap .toggler:checked + .hamburger > div::before, .menu-wrap .toggler:checked + .hamburger > div::after { top: 0; transform: rotate(90deg); }
+        .menu-wrap .menu { position: fixed; top: 0; right: 0; width: 100%; height: 100%; visibility: hidden; display: flex; align-items: center; justify-content: flex-end; z-index: 150; }
+        .menu-wrap .menu > div { background: rgba(5, 28, 44, 0.98); border-left: 4px solid var(--wf-red); width: 300px; height: 100%; display: flex; align-items: center; justify-content: center; transform: translateX(100%); transition: all 0.4s ease; }
+        .menu-wrap .toggler:checked ~ .menu { visibility: visible; }
+        .menu-wrap .toggler:checked ~ .menu > div { transform: translateX(0); }
+        .menu-wrap .menu ul { list-style: none; padding: 0; text-align: right; }
+        .menu-wrap .menu ul li { padding: 1.2rem 2rem; }
+        .menu-wrap .menu ul li a { color: var(--wf-white); text-decoration: none; font-size: 1.6rem; font-weight: 900; text-transform: uppercase; }
+
+        /* --- Rules Content --- */
+        .rules-container {
+            margin-top: 120px;
+            max-width: 850px;
+            width: 90%;
+            background: var(--wf-dark-bg);
+            border: 1px solid rgba(153, 230, 255, 0.1);
+            padding: 50px;
+            position: relative;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            margin-bottom: 60px;
+        }
+
+        .stamp {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            border: 4px double var(--wf-red);
+            color: var(--wf-red);
+            padding: 10px 20px;
+            font-weight: 900;
+            text-transform: uppercase;
+            transform: rotate(15deg);
+            opacity: 0.6;
+            user-select: none;
+            font-size: 1.2rem;
+        }
+
+        .rules-header {
+            border-bottom: 2px solid var(--wf-cyan);
+            margin-bottom: 40px;
+            padding-bottom: 15px;
+        }
+
+        .rules-header h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            font-family: 'Archivo Black', sans-serif;
+        }
+
+        .section-label {
+            display: block;
+            background: var(--wf-red);
+            color: white;
+            padding: 5px 15px;
+            font-size: 0.75rem;
+            font-weight: 900;
+            width: fit-content;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .rule-section {
+            margin-bottom: 35px;
+            border-left: 3px solid var(--wf-red);
+            padding-left: 20px;
+        }
+
+        .rule-title {
+            color: var(--wf-cyan);
+            font-weight: bold;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .rule-text {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            opacity: 0.8;
+            margin: 0;
+        }
+
+        .warning-footer {
+            background: rgba(153, 230, 255, 0.05);
+            border: 1px dashed var(--wf-cyan);
+            padding: 25px;
+            text-align: center;
+            font-weight: 900;
+            color: var(--wf-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+        }
+
+        footer { margin-top: auto; padding: 40px; font-size: 0.9rem; opacity: 0.6; text-align: center; text-transform: uppercase; letter-spacing: 2px; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="nav-btn">HOME</a>
+    </nav>
+
+    <div class="menu-wrap">
+        <input type="checkbox" class="toggler">
+        <div class="hamburger"><div></div></div>
+        <div class="menu">
+            <div>
+                <ul>
+                    <li><a href="store.html">STORE</a></li>
+                    <li><a href="vote.html">VOTE</a></li>
+                    <li><a href="lore.html">LORE</a></li>
+                    <li><a href="rules.html">RULES</a></li>
+                    <li><a href="staff.html">STAFF LIST</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="rules-container">
+        <div class="stamp">Mandatory</div>
+        
+        <div class="rules-header">
+            <h1>Project: Blue Book</h1>
+            <p style="color: var(--wf-cyan); font-size: 0.8rem; letter-spacing: 2px; margin-top: 10px;">SOP-99-ALPHA | OPERATIVE CONDUCT PROTOCOLS</p>
+        </div>
+
+        <div class="section-label">Section I: Neutral Frequency</div>
+
+        <div class="rule-section">
+            <span class="rule-title">01. Political Neutrality</span>
+            <p class="rule-text">This frequency is reserved for the pursuit of the unknown. Discussions regarding real-world politics, candidates, or partisan movements are strictly prohibited to ensure the focus remains on the mission.</p>
+        </div>
+
+        <div class="rule-section">
+            <span class="rule-title">02. Inter-Agency Conduct</span>
+            <p class="rule-text">All operatives are expected to maintain professional decorum. We are a collective of truth-seekers; communication must remain constructive, respectful, and inclusive at all times.</p>
+        </div>
+
+        <div class="rule-section">
+            <span class="rule-title">03. Signal Clarity</span>
+            <p class="rule-text">Keep the comms clear for mission-critical data. Avoid spam, excessive capitalization, or the promotion of external servers and unrelated frequencies.</p>
+        </div>
+
+        <div class="rule-section">
+            <span class="rule-title">04. The Hecklefish Principle</span>
+            <p class="rule-text">Sarcasm and wit are inherent to our culture, but they must never compromise the safety or well-being of a fellow operative. If a joke becomes a breach of respect, it is no longer permitted.</p>
+        </div>
+
+        <div class="section-label">Section II: Site Integrity</div>
+
+        <div class="rule-section">
+            <span class="rule-title">05. Site Authorization</span>
+            <p class="rule-text">Do not tamper with, enter, or modify a Research Site (base) that is not your own without explicit authorization from the lead operative of that site.</p>
+        </div>
+
+        <div class="rule-section">
+            <span class="rule-title">06. Structural Stability</span>
+            <p class="rule-text">To maintain server equilibrium, do not construct "Lag Machines" or unoptimized redstone clocks that could destabilize the simulation for other operatives.</p>
+        </div>
+
+        <div class="section-label">Section III: Tech Protocols</div>
+
+        <div class="rule-section">
+            <span class="rule-title">07. Standard Issue Only</span>
+            <p class="rule-text">Operatives must use approved clients. The use of unauthorized augmentations—such as X-ray, flight-hacks, or automated combat tools—is a direct breach of the project's mechanical integrity.</p>
+        </div>
+
+        <div class="rule-section">
+            <span class="rule-title">08. Anomaly Reporting</span>
+            <p class="rule-text">If you discover a "glitch in the matrix" (duplication or economy exploit), you are required to report it to a Lead Researcher immediately rather than utilizing it for personal gain.</p>
+        </div>
+
+        <div class="section-label">Section IV: Security (OPSEC)</div>
+
+        <div class="rule-section">
+            <span class="rule-title">09. Identity Protection</span>
+            <p class="rule-text">Never share real-world coordinates or personal data of yourself or other operatives on public frequencies. Protect the identity of the Division.</p>
+        </div>
+
+        <div class="rule-section">
+            <span class="rule-title">10. Account Integrity</span>
+            <p class="rule-text">You are the sole custodian of your access credentials. All actions taken under your operative ID are your sole responsibility.</p>
+        </div>
+
+        <div class="warning-footer">
+            Maintain the mystery. Protect the timeline.
+            <br>Always keep your foil hat within reach.
+        </div>
+    </div>
+
+    <footer>
+         Another mystery solved... or is it?
+    </footer>
+
+</body>
+</html>
